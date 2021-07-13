@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SunnyWeather</string>
+    <string name="city">城市</string>
+    <string name="setting">设置</string>
+    <string name="weather">天气</string>
+    <string name="go_to_placemanager">前往城市管理</string>
+    <string name="addCities">添加城市</string>
+    <string name="cityName">城市名</string>
+    <string name="temperature">温度</string>
+    <string name="delete">删除</string>
+    <string name="searchCity">搜索城市</string>
+    <string name="hint">hint</string>
+</resources>
