@@ -47,7 +47,6 @@ class PlaceActivity : AppCompatActivity() {
         recyclerView.adapter=adapter
         registerForContextMenu(recyclerView)
         cityListManager.observeList()
-        cityListManager.addCity(RecyclerCity("深圳","30"))
         binding.addCity.bringToFront()
         binding.addCity.setOnClickListener {
             startActivity(Intent(this,AddCityActivity::class.java))

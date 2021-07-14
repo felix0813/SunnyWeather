@@ -16,7 +16,7 @@ abstract class CityDB:RoomDatabase() {
             instance?.let {
                 return it
             }
-            return Room.databaseBuilder(context.applicationContext,CityDB::class.java,"cityDB").build().apply {
+            return Room.databaseBuilder(context.applicationContext,CityDB::class.java,"cityDB").allowMainThreadQueries().build().apply {
                 instance=this
             }
         }

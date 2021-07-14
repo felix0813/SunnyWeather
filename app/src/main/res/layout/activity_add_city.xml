@@ -42,6 +42,6 @@
         app:layout_constraintTop_toBottomOf="@+id/searchTitle"
         android:layout_width="match_parent"
         android:layout_height="650dp"
-        android:id="@+id/hintRecycler"/>
+        android:id="@+id/resultRecycler"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
