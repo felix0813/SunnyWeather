@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         supportActionBar?.title=""
         binding.setCity.setOnClickListener {
-            startActivity(Intent(this,PlaceActivity::class.java))
+            startActivity(Intent(this,CityManageActivity::class.java))
         }
     }
 

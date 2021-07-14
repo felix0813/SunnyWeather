@@ -5,7 +5,9 @@ import android.content.Context
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import com.example.sunnyweather.Address
 import com.example.sunnyweather.City
+import com.example.sunnyweather.Logic.DAO.AddressDB
 import com.example.sunnyweather.Logic.DAO.CityDB
 import com.example.sunnyweather.MyApplication
 import com.example.sunnyweather.R
@@ -16,6 +18,7 @@ import kotlin.concurrent.thread
 class CityDBManager() {
     val context = MyApplication.context
     val cityDAO = CityDB.getDB(context).cityDao()
+    val addressDAO=AddressDB.getAddressDB(context).addressDAO()
     var hasInit = false
 
     init {
@@ -33,27 +36,6 @@ class CityDBManager() {
     }
 
     fun initCity() {
-        val inputStream = context.resources.openRawResource(R.raw.city_code)
-        val reader = inputStream.bufferedReader()
-        var count = 0
-
-        reader.forEachLine {
-            val arr = it.split(",")
-            val id = arr[0].toInt()
-            val name = arr[1]
-            val city = City(name, id)
-            try {
-                cityDAO.insertCity(city)
-                count++
-            }
-            catch (e:Exception){
-                e.printStackTrace()
-                Log.e("repeatedID","$id $name")
-            }
-
-        }
-        Log.d("count", count.toString())
-        reader.close()
         val inputStream2 = context.resources.openRawResource(R.raw.district_code)
         val reader2 = inputStream2.bufferedReader()
         var count2 = 0
@@ -61,9 +43,13 @@ class CityDBManager() {
             val arr = it.split(",")
             val id = arr[0].toInt()
             Log.e("num",id.toString())
-            val name = arr[1]
+            val name = arr[3]
+            val x=arr[1].toFloat()
+            val y=arr[2].toFloat()
+            val address=Address(id,x,y)
             val city = City(name, id)
             try {
+                addressDAO.insertAddress(address)
                 cityDAO.insertCity(city)
                 count2++
             }
@@ -72,7 +58,6 @@ class CityDBManager() {
                 Log.e("repeatedID","$id $name")
             }
         }
-        Log.d("count2", count.toString())
         reader2.close()
         context.getSharedPreferences("city", Context.MODE_PRIVATE).edit {
             putBoolean("hasInit", true)

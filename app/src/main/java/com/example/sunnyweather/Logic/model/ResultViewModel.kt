@@ -2,7 +2,6 @@ package com.example.sunnyweather.Logic.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sunnyweather.RecyclerCity
 
 class ResultViewModel : ViewModel() {
     val resultList= MutableLiveData<ArrayList<String>>()

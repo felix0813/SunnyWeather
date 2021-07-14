@@ -10,7 +10,7 @@ import com.example.sunnyweather.databinding.ActivityAddCityBinding
 
 class AddCityActivity : AppCompatActivity() {
     lateinit var binding:ActivityAddCityBinding
-    val list=ArrayList<String>()
+    val list=ArrayList<City>()
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val adapter=ResultAdapter(list,this)

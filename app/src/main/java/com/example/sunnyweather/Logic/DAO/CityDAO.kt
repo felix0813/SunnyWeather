@@ -1,6 +1,5 @@
 package com.example.sunnyweather.Logic.DAO
 
-import android.util.Log
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -26,8 +25,8 @@ interface CityDAO {
     @Query("select name from City")
     fun queryAllName():List<String>
 
-    @Query("select name from City where name like '%' ||:name || '%'")
-    fun queryName(name: String):List<String>
+    @Query("select * from City where name like '%' ||:name || '%'")
+    fun queryName(name: String):List<City>
 
 
 }

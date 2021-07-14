@@ -2,16 +2,15 @@ package com.example.sunnyweather.Logic.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sunnyweather.RecyclerCity
-
+import com.example.sunnyweather.SelectedCity
 class CityListViewModel:ViewModel() {
-    val cityList=MutableLiveData<ArrayList<RecyclerCity>>()
+    val cityList=MutableLiveData<ArrayList<SelectedCity>>()
     val size=MutableLiveData<Int>()
     init {
         size.value=0
         cityList.value=ArrayList()
     }
-    fun addCity(city: RecyclerCity):Boolean {
+    fun addCity(city: SelectedCity):Boolean {
         cityList.value?.add(city)
         size.value=cityList.value?.size
         return true

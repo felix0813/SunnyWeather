@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.baidu.mapapi.SDKInitializer
 
 class MyApplication:Application(){
     companion object {

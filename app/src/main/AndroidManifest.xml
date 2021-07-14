@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sunnyweather">
-
+<uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".MyApplication"
         android:icon="@mipmap/ic_launcher"
@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SunnyWeather"
         tools:targetApi="n">
         <activity android:name=".AddCityActivity"></activity>
-        <activity android:name=".PlaceActivity" />
+        <activity android:name=".CityManageActivity" android:launchMode="singleTask"/>
         <activity android:name=".SettingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -25,11 +25,11 @@ class SettingActivity : AppCompatActivity() {
         var AK=reader.getString("ak","")
         viewModel=ViewModelProvider(this).get(AKViewModel::class.java)
         viewModel.AKCode.value=AK
-        binding.AKCode.setText(viewModel.AKCode.value)
+        binding.tokenCode.setText(viewModel.AKCode.value)
 
 
         binding.Button.setOnClickListener {
-            AK=binding.AKCode.text.toString()
+            AK=binding.tokenCode.text.toString()
             viewModel.setAK(AK!!)
         }
     }

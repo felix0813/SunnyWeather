@@ -10,4 +10,6 @@
     <string name="delete">删除</string>
     <string name="searchCity">搜索城市</string>
     <string name="hint">hint</string>
+    <string name="token">彩云令牌</string>
+    <string name="putcaiyun">输入彩云令牌</string>
 </resources>
