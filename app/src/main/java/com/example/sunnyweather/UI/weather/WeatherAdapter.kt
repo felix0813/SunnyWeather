@@ -29,7 +29,7 @@ class WeatherAdapter(val weatherList: Array<Weather?>):RecyclerView.Adapter<Weat
             holder.time.text="现在"
         }
         else{
-            val tmp=((Calendar.HOUR_OF_DAY+position)%24).toString()+":00"
+            val tmp=((Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+position)%24).toString()+":00"
             holder.time.text=tmp
         }
         val tmp=weather!!.temperature.toDouble().toInt().toString()+"℃"
