@@ -43,6 +43,11 @@
         app:layout_constraintTop_toBottomOf="@+id/searchTitle"
         android:layout_width="match_parent"
         android:layout_height="650dp"
+        android:id="@+id/hintRecycler"/>
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
         android:id="@+id/resultRecycler"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

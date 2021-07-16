@@ -16,8 +16,6 @@ object WeatherViewModel: ViewModel() {
     }
 
     fun addWeather(cityID:Int, weather:Weather){
-
             weatherList.value!!.put(cityID,weather)
-
     }
 }

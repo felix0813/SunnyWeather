@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
+        android:id="@+id/textField"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp">
@@ -46,5 +47,15 @@
             android:layout_height="match_parent"
             />
     </LinearLayout>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/textField"
+        android:id="@+id/hint"
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="默认令牌为  Pt4ChzU3W0ca8SpE"
+        android:layout_marginLeft="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

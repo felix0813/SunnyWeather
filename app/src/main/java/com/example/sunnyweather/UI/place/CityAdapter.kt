@@ -9,6 +9,7 @@ import androidx.core.content.edit
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sunnyweather.R
 import com.example.sunnyweather.SelectedCity
+import java.lang.Exception
 import java.lang.StringBuilder
 import java.util.*
 
@@ -41,7 +42,13 @@ class CityAdapter(val cityList:List<SelectedCity>, val activity:AppCompatActivit
             "LIGHT_HAZE"->holder.itemView.setBackgroundResource(R.drawable.lighthaze)
             "MODERATE_HAZE"->holder.itemView.setBackgroundResource(R.drawable.midhaze)
             "HEAVY_HAZE"->holder.itemView.setBackgroundResource(R.drawable.heavyhaze)
-            "LIGHT_RAIN"->holder.itemView.setBackgroundResource(R.drawable.lightrain)
+            "LIGHT_RAIN"->{
+                holder.itemView.apply {
+                    setBackgroundResource(R.drawable.lightrain)
+                    background.alpha=200
+                }
+
+            }
             "MODERATE_RAIN"->holder.itemView.setBackgroundResource(R.drawable.midrain)
             "HEAVY_RAIN"->holder.itemView.setBackgroundResource(R.drawable.heavyrain)
             "STORM_RAIN"->holder.itemView.setBackgroundResource(R.drawable.stormrain)
@@ -73,10 +80,15 @@ class CityAdapter(val cityList:List<SelectedCity>, val activity:AppCompatActivit
         }
         holder.cityName.text=cityName
         holder.temperature.text=city.temperature
+        try{
+        holder.temperature.text=city.temperature.toDouble().toInt().toString()}
+        catch (e:Exception){
+            
+        }
         holder.itemView.isLongClickable
         holder.itemView.setOnLongClickListener {
             activity.getSharedPreferences("toDelete",Context.MODE_PRIVATE).edit{
-                putString("toDelete",holder.cityName.text.toString())
+                putString("toDelete",city.name)
             }
 
             return@setOnLongClickListener false

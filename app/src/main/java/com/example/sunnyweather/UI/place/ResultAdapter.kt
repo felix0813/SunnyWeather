@@ -24,9 +24,17 @@ class ResultAdapter(val resultList:ArrayList<City>, val activity:AppCompatActivi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val result=resultList[position]
-        holder.resultButton.text=result.name
         holder.idtext.text=result.id.toString()
+        val tmp=result.name.toString()
+        holder.resultButton.text=tmp
+            /*if(tmp.contains("省"))
+            {
+                tmp.split("省")[1]
+        }
+        else{
+            tmp}*/
         holder.resultButton.setOnClickListener {
+
             //Toast.makeText(MyApplication.context,"click id is ${holder.idtext.text.toString()}",Toast.LENGTH_SHORT).show()
             Log.e("id",holder.idtext.text.toString())
             val intent= Intent(activity,CityManageActivity::class.java)

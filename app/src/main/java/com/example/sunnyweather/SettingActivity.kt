@@ -3,8 +3,8 @@ package com.example.sunnyweather
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sunnyweather.Logic.model.AKViewModel
 import com.example.sunnyweather.databinding.ActivitySettingBinding
@@ -31,6 +31,8 @@ class SettingActivity : AppCompatActivity() {
         binding.Button.setOnClickListener {
             AK=binding.tokenCode.text.toString()
             viewModel.setAK(AK!!)
+            Toast.makeText(this,"设置成功",Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 
