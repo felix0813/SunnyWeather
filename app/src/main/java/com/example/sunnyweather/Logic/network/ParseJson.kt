@@ -82,16 +82,16 @@ object ParseJson {
     }
     fun parseHourlyToArr(hourly:JSONObject): Array<Weather?> {
         var arr=hourly.getJSONArray("temperature")
-        var arr1= arrayOfNulls<Double>(24)
+        val arr1= arrayOfNulls<Double>(24)
         for ( num in 0..23){
             arr1[num]=arr.getJSONObject(num).getDouble("value")
         }
         arr=hourly.getJSONArray("skycon")
-        var arr2= arrayOfNulls<String>(24)
+        val arr2= arrayOfNulls<String>(24)
         for(num in 0..23){
             arr2[num]=arr.getJSONObject(num).getString("value")
         }
-        var result= arrayOfNulls<Weather>(24)
+        val result= arrayOfNulls<Weather>(24)
         for(num in 0..23){
             result[num]= Weather(arr1[num].toString(),arr2[num]!!)
         }
@@ -99,16 +99,16 @@ object ParseJson {
     }
     fun parseDailyToArr(daily:JSONObject): Array<Weather?> {
         var arr=daily.getJSONArray("temperature")
-        var arr1= arrayOfNulls<Double>(5)
+        val arr1= arrayOfNulls<Double>(5)
         for ( num in 0..4){
             arr1[num]=arr.getJSONObject(num).getDouble("avg")
         }
         arr=daily.getJSONArray("skycon")
-        var arr2= arrayOfNulls<String>(5)
+        val arr2= arrayOfNulls<String>(5)
         for(num in 0..4){
             arr2[num]=arr.getJSONObject(num).getString("value")
         }
-        var result= arrayOfNulls<Weather>(5)
+        val result= arrayOfNulls<Weather>(5)
         for(num in 0..4){
             result[num]= Weather(arr1[num].toString(),arr2[num]!!)
         }

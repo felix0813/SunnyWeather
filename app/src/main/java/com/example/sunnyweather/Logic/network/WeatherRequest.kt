@@ -1,8 +1,6 @@
 package com.example.sunnyweather.Logic.network
 
 import android.content.Context
-import com.baidu.mapapi.search.weather.WeatherDataType
-import com.baidu.mapapi.search.weather.WeatherSearchOption
 import com.example.sunnyweather.MyApplication
 
 class WeatherRequest(cityID:Int) {

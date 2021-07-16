@@ -32,6 +32,9 @@ class SettingActivity : AppCompatActivity() {
             AK=binding.tokenCode.text.toString()
             viewModel.setAK(AK!!)
             Toast.makeText(this,"设置成功",Toast.LENGTH_SHORT).show()
+            while(getSharedPreferences("ak",Context.MODE_PRIVATE).all.size==0){
+                Thread.sleep(1000)
+            }
             finish()
         }
     }

@@ -14,4 +14,6 @@
     <string name="putcaiyun">输入彩云令牌</string>
     <string name="previouscity">上一城市</string>
     <string name="nextcity">下一城市</string>
+    <string name="defaultToken">默认令牌为 Pt4ChzU3W0ca8SpE</string>
+    <string name="ensure">确认</string>
 </resources>

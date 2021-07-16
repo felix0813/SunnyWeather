@@ -1,10 +1,7 @@
 package com.example.sunnyweather.Logic.model
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.baidu.mapapi.search.weather.WeatherResult
 import com.example.sunnyweather.Weather
 
 object WeatherViewModel: ViewModel() {

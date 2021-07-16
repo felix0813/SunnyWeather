@@ -34,10 +34,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SunnyWeather"
-        tools:targetApi="n">
+        tools:targetApi="n"
+        android:allowBackup="true"
+        tools:ignore="AllowBackup">
         <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="Faxbpsclr5gMox8zMADDmOE01qOpGNOt" />
-        <activity android:name=".AddCityActivity"></activity>
-        <activity android:name=".CityManageActivity" android:launchMode="singleTask"/>
+
+        <activity android:name=".AddCityActivity" />
+        <activity android:name=".CityManageActivity" android:screenOrientation="portrait" android:launchMode="singleTask"
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

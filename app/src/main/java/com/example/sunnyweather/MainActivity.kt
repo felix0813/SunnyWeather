@@ -3,6 +3,7 @@ package com.example.sunnyweather
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -22,7 +23,6 @@ import com.baidu.location.BDAbstractLocationListener
 import com.baidu.location.BDLocation
 import com.baidu.location.LocationClient
 import com.baidu.location.LocationClientOption
-import com.baidu.mapapi.map.BaiduMap
 import com.example.sunnyweather.UI.weather.SearchWeather
 import com.example.sunnyweather.UI.weather.WeatherAdapter
 import com.example.sunnyweather.databinding.ActivityMainBinding
@@ -32,9 +32,9 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    lateinit var hourlyArray: Array<Weather>
-    lateinit var dailyArray: Array<Weather>
     lateinit var cityArray: Array<City?>
+    lateinit var reader:SharedPreferences
+    lateinit var map:MutableMap<String,*>
     var order=0
     lateinit var detailedWeather: DetailedWeather
     var nowCityName=""
@@ -42,28 +42,14 @@ class MainActivity : AppCompatActivity() {
     var init=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val reader=getSharedPreferences("monitorCity",Context.MODE_PRIVATE)
-        val map=reader.all
-        cityArray= arrayOfNulls(map.size)
-        var num=0
-        map.forEach {
-            if(init==false){
-                nowCityName=it.key
-                nowCity=it.value.toString().toInt()
-                init=true
-            }
-            cityArray[num]=City(it.key,it.value.toString().toInt())
-            num++
-            SearchWeather.searchDetailedWeather(it.value.toString().toInt())
-        }
-
-        testBaiduLocation()
-
-
-
+        getReady()
+        thread {  testBaiduLocation()}
         binding= ActivityMainBinding.inflate(layoutInflater)
         if(map.size!=0) {
             initialAll()
+        }
+        else{
+            Toast.makeText(this,"当前无选中城市",Toast.LENGTH_LONG).show()
         }
 
         setContentView(binding.root)
@@ -108,9 +94,41 @@ class MainActivity : AppCompatActivity() {
         }
         binding.refreshButton.bringToFront()
         binding.refreshButton.setOnClickListener {
-            initialAll()
-            Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()
+            if (map.size!=0){
+                initialAll()
+                Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this,"无选中城市,尝试定位当前城市",Toast.LENGTH_SHORT).show()
+                thread {
+                    testBaiduLocation()
+                }
+                getReady()
+                if (map.size!=0){
+                    initialAll()
+                    Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
+    }
+
+    private fun getReady() {
+        reader = getSharedPreferences("monitorCity", MODE_PRIVATE)
+        map = reader.all
+        cityArray = arrayOfNulls(map.size)
+        var num = 0
+        map.forEach {
+            if (init == false) {
+                nowCityName = it.key
+                nowCity = it.value.toString().toInt()
+                init = true
+            }
+            cityArray[num] = City(it.key, it.value.toString().toInt())
+            num++
+            SearchWeather.searchDetailedWeather(it.value.toString().toInt())
+        }
+        Log.d("main","get ready")
     }
 
     private fun testBaiduLocation() {
@@ -127,14 +145,14 @@ class MainActivity : AppCompatActivity() {
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     )
                 ) {
-                    Toast.makeText(this, "自Android 6.0开始需要打开位置权限", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "自Android 6.0开始需要打开位置权限", Toast.LENGTH_SHORT).show()
                 }
                 //请求权限
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
                     1
-                );
+                )
             }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//如果 API level 是大于等于 23(Android 6.0) 时
@@ -150,14 +168,14 @@ class MainActivity : AppCompatActivity() {
                         Manifest.permission.ACCESS_FINE_LOCATION
                     )
                 ) {
-                    Toast.makeText(this, "自Android 6.0开始需要打开位置权限", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "自Android 6.0开始需要打开位置权限", Toast.LENGTH_SHORT).show()
                 }
                 //请求权限
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                     1
-                );
+                )
             }
         }
 
@@ -167,14 +185,14 @@ class MainActivity : AppCompatActivity() {
                 val city=location?.getCity()?:""
                 var district: String = location?.getDistrict() ?: ""
                 val adcode: String = location?.getAdCode() ?: ""
-                Log.d("test", district + adcode)
+                Log.d("district", district + adcode)
                 if(district==""){
                     district=city
                 }
                 if (location != null) {
                     val reader2=getSharedPreferences("monitorCity",Context.MODE_PRIVATE)
                     Log.e("error", location.locType.toString() + location.locTypeDescription)
-                    if(location.locType==161){
+                    if(!adcode.equals("")){
                         var contain=false
                         val map2=reader2.all
                         var repeatString=""
@@ -432,15 +450,6 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        when(requestCode){
-            1->{
-                if(grantResults.isNotEmpty()&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
 
-                }
-                else{
-
-                }
-            }
-        }
     }
 }
