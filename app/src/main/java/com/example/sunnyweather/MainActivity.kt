@@ -270,12 +270,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val tokenFilled=
-            if(getSharedPreferences("ak",Context.MODE_PRIVATE).all.size==0)
-            {false}
-            else
-            {true}
-        if(tokenFilled==false){
+        if(getSharedPreferences("ak",Context.MODE_PRIVATE).all.size==0){
             AlertDialog.Builder(this).setTitle("警告").setMessage("您还没有填入令牌，请先填入令牌再使用").setCancelable(false).setPositiveButton("确定",{_,_->
                 startActivity(Intent(this,SettingActivity::class.java))
             }).create().show()
@@ -331,8 +326,8 @@ class MainActivity : AppCompatActivity() {
     fun getDate(addition:Int):String{
         val c = Calendar.getInstance()
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"))
-        val mMonth = (c.get(Calendar.MONTH) + 1).toString()// 获取当前月份
-        val mDay = (c.get(Calendar.DAY_OF_MONTH)).toString()// 获取当前月份的日期号码
+        var mMonth = (c.get(Calendar.MONTH) + 1).toString()// 获取当前月份
+        var mDay = (c.get(Calendar.DAY_OF_MONTH)+addition).toString()// 获取当前月份的日期号码
         var mWay = ((c.get(Calendar.DAY_OF_WEEK)+addition)%7).toString()
         if("1".equals(mWay)){
             mWay ="天"
@@ -349,7 +344,29 @@ class MainActivity : AppCompatActivity() {
         }else if("0".equals(mWay)){
             mWay ="六"
         }
-
+        if(mMonth.equals("1")||mMonth.equals("3")||mMonth.equals("5")||mMonth.equals("7")||mMonth.equals("8")||mMonth.equals("10")||mMonth.equals("12")){
+            if(mDay.toInt()>31){
+                mDay=(mDay.toInt()%31).toString()
+                if(mMonth.equals("12")){
+                    mMonth="1"
+                }
+                else{
+                    mMonth=(mMonth.toInt()+1).toString()
+                }
+            }
+        }
+        else if(mMonth.equals("4")||mMonth.equals("6")||mMonth.equals("9")||mMonth.equals("11")){
+            if(mDay.toInt()>30){
+                mDay=(mDay.toInt()%30).toString()
+                mMonth=(mMonth.toInt()+1).toString()
+            }
+        }
+        else if(mMonth.equals("2")){
+            if(mDay.toInt()>28){
+                mDay=(mDay.toInt()%28).toString()
+                mMonth="3"
+            }
+        }
         return mMonth+"月" + mDay+"日"+"/星期"+mWay
     }
     fun getBackground(skycon:String)=when(skycon){
