@@ -1,5 +1,6 @@
 package com.example.sunnyweather
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ class AddCityActivity : AppCompatActivity() {
     lateinit var binding:ActivityAddCityBinding
     val list=ArrayList<City>()
     val list2=ArrayList<City>()
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val adapter=ResultAdapter(list,this)

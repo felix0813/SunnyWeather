@@ -240,7 +240,13 @@ class MainActivity : AppCompatActivity() {
         detailedWeather = SearchWeather.getDetailedWeather(nowCity)!!
         var _name =
             if (nowCityName.contains("省")) {
-                nowCityName.split("省")[1]
+                if(nowCityName.split("省")[1].length>=2){
+                    nowCityName.split("省")[1]
+                }
+                else{
+                    nowCityName.split("省")[0]
+                }
+
             } else {
                 nowCityName
             }
