@@ -1,0 +1,3 @@
+# SunnyWeather
+kotlin语言开发的天气预报app
+用到了彩云api和百度定位api
