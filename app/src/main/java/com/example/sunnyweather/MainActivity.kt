@@ -1,6 +1,7 @@
 package com.example.sunnyweather
 
 import android.Manifest
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -27,6 +28,7 @@ import com.example.sunnyweather.UI.weather.WeatherAdapter
 import com.example.sunnyweather.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.concurrent.thread
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -38,8 +40,10 @@ class MainActivity : AppCompatActivity() {
     private var nowCityName = ""
     private var nowCity = -1
     private var init = false
+    private var isFirst by Delegates.notNull<Boolean>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isFirst=getSharedPreferences("ak",Context.MODE_PRIVATE).all.isEmpty()
         val reader=getSharedPreferences("ak",Context.MODE_PRIVATE)
         reader.edit().apply {
             putString("ak", "Pt4ChzU3W0ca8SpE")
@@ -60,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = ""
         binding.previousCity.bringToFront()
         binding.nextCity.bringToFront()
+
         binding.setCity.setOnClickListener {
             startActivity(Intent(this, CityManageActivity::class.java))
         }
@@ -113,7 +118,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
     private fun getReady() {
         reader = getSharedPreferences("monitorCity", MODE_PRIVATE)
         map = reader.all
