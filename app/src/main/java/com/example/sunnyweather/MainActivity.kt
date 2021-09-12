@@ -324,19 +324,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.setting -> {
-                startActivity(Intent(this, SettingActivity::class.java))
-            }
-        }
-        return true
-    }
 
     fun getDate(addition: Int): String {
         val c = Calendar.getInstance()
