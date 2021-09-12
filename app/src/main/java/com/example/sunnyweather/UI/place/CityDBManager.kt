@@ -11,14 +11,13 @@ import com.example.sunnyweather.Logic.DAO.AddressDB
 import com.example.sunnyweather.Logic.DAO.CityDB
 import com.example.sunnyweather.MyApplication
 import com.example.sunnyweather.R
-import java.lang.Exception
 import kotlin.concurrent.thread
 
 @SuppressLint("StaticFieldLeak")
 class CityDBManager() {
     val context = MyApplication.context
     val cityDAO = CityDB.getDB(context).cityDao()
-    val addressDAO=AddressDB.getAddressDB(context).addressDAO()
+    val addressDAO = AddressDB.getAddressDB(context).addressDAO()
     var hasInit = false
 
     init {
@@ -42,20 +41,19 @@ class CityDBManager() {
         reader2.forEachLine {
             val arr = it.split(",")
             val id = arr[0].toInt()
-            Log.e("num",id.toString())
+            Log.e("num", id.toString())
             val name = arr[3]
-            val x=arr[1].toFloat()
-            val y=arr[2].toFloat()
-            val address=Address(id,x,y)
+            val x = arr[1].toFloat()
+            val y = arr[2].toFloat()
+            val address = Address(id, x, y)
             val city = City(name, id)
             try {
                 addressDAO.insertAddress(address)
                 cityDAO.insertCity(city)
                 count2++
-            }
-            catch (e:Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
-                Log.e("repeatedID","$id $name")
+                Log.e("repeatedID", "$id $name")
             }
         }
         reader2.close()

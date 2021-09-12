@@ -7,7 +7,7 @@ import com.example.sunnyweather.SelectedCity
 
 class CityListManager(activity: AppCompatActivity) {
     //val cityListViewModel=CityListViewModel
-   val cityListViewModel = ViewModelProvider(activity).get(CityListViewModel::class.java)
+    val cityListViewModel = ViewModelProvider(activity).get(CityListViewModel::class.java)
     var last = -1
     fun getCityList(): ArrayList<SelectedCity>? {
         last = cityListViewModel.size.value!!

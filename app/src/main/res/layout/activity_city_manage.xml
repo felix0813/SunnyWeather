@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CityManageActivity">
+
     <ImageButton
+        android:id="@+id/addCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addCity"
+        android:contentDescription="@string/addCities"
         android:src="@android:drawable/ic_menu_add"
         app:layout_constraintEnd_toEndOf="@+id/placeToolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/addCities" />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/placeToolbar"
         android:layout_width="match_parent"
@@ -20,25 +22,25 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        app:layout_constraintTop_toBottomOf="@+id/placeToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="675dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="675dp">
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/swipeRefresh"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/recyclerView"
-    />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        app:layout_constraintTop_toBottomOf="@+id/placeToolbar">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

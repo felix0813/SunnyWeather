@@ -3,51 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:screenOrientation="portrait"
     android:layout_height="match_parent"
+    android:screenOrientation="portrait"
     tools:context=".AddCityActivity">
+
     <TextView
         android:id="@+id/searchTitle"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:gravity="center"
         android:text="@string/searchCity"
         android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:id="@+id/searchView"
-            app:queryHint="搜索城市"/>
+            app:queryHint="搜索城市" />
+
         <Button
             android:id="@+id/cancel"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
             android:text="取消"
             android:textSize="16sp"
-            android:background="@color/transparent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toBottomOf="@+id/searchTitle"
+        android:id="@+id/hintRecycler"
         android:layout_width="match_parent"
         android:layout_height="650dp"
-        android:id="@+id/hintRecycler"/>
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle" />
+
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toBottomOf="@+id/searchTitle"
+        android:id="@+id/resultRecycler"
         android:layout_width="match_parent"
         android:layout_height="650dp"
-        android:id="@+id/resultRecycler"/>
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

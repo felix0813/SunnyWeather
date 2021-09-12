@@ -5,15 +5,15 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 
-class MyApplication:Application(){
+class MyApplication : Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")
-        lateinit var context:Context
+        lateinit var context: Context
     }
 
     override fun onCreate() {
         super.onCreate()
-        context=applicationContext
+        context = applicationContext
     }
 
     override fun attachBaseContext(base: Context?) {

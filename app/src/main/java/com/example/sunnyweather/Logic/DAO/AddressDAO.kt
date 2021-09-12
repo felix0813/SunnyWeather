@@ -9,12 +9,12 @@ import com.example.sunnyweather.Address
 interface AddressDAO {
 
     @Insert
-    fun insertAddress(address: Address):Long
+    fun insertAddress(address: Address): Long
 
     @Query("select * from Address")
-    fun queryAll():List<Address>
+    fun queryAll(): List<Address>
 
     @Query("select * from Address where id=:id")
-    fun queryById(id:Int):List<Address>
+    fun queryById(id: Int): List<Address>
 
 }
