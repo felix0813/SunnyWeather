@@ -66,53 +66,65 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, CityManageActivity::class.java))
         }
         binding.previousCity.setOnClickListener {
-            Log.d("test", order.toString())
-            Log.d("test", "click")
-            if (cityArray.size > 1) {
-                order = if (order == 0) {
-                    cityArray.size - 1
-                } else {
-                    order - 1
-                }
-                nowCity = cityArray[order]!!.id!!
-                nowCityName = cityArray[order]!!.name!!
-                runOnUiThread { initialAll() }
-
-                Log.d("test", nowCityName)
-            }
+            goToLastCity()
         }
         binding.nextCity.setOnClickListener {
-            Log.d("test", order.toString())
-            Log.d("test", "click")
-            if (cityArray.size > 1) {
-                order = if (order == cityArray.size - 1) {
-                    0
-                } else {
-                    order + 1
-                }
-                nowCity = cityArray[order]!!.id!!
-                nowCityName = cityArray[order]!!.name!!
-                runOnUiThread { initialAll() }
-                Log.d("test", nowCityName)
-            }
+            goToiNextCity()
         }
         binding.refreshButton.bringToFront()
         binding.refreshButton.setOnClickListener {
+            refreshCity()
+
+        }
+    }
+
+    private fun goToLastCity() {
+        Log.d("test", order.toString())
+        Log.d("test", "click")
+        if (cityArray.size > 1) {
+            order = if (order == 0) {
+                cityArray.size - 1
+            } else {
+                order - 1
+            }
+            nowCity = cityArray[order]!!.id!!
+            nowCityName = cityArray[order]!!.name!!
+            runOnUiThread { initialAll() }
+
+            Log.d("test", nowCityName)
+        }
+    }
+
+    private fun goToiNextCity() {
+        Log.d("test", order.toString())
+        Log.d("test", "click")
+        if (cityArray.size > 1) {
+            order = if (order == cityArray.size - 1) {
+                0
+            } else {
+                order + 1
+            }
+            nowCity = cityArray[order]!!.id!!
+            nowCityName = cityArray[order]!!.name!!
+            runOnUiThread { initialAll() }
+            Log.d("test", nowCityName)
+        }
+    }
+
+    private fun refreshCity() {
+        if (map.isNotEmpty()) {
+            initialAll()
+            Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "无选中城市,尝试定位当前城市", Toast.LENGTH_SHORT).show()
+            thread {
+                testBaiduLocation()
+            }
+            getReady()
             if (map.isNotEmpty()) {
                 initialAll()
                 Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "无选中城市,尝试定位当前城市", Toast.LENGTH_SHORT).show()
-                thread {
-                    testBaiduLocation()
-                }
-                getReady()
-                if (map.isNotEmpty()) {
-                    initialAll()
-                    Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
-                }
             }
-
         }
     }
 
@@ -257,7 +269,7 @@ class MainActivity : AppCompatActivity() {
             }
         try {
             _name = when {
-                _name[_name.length - 1] == ('区') -> _name.split("市")[1]
+                _name[_name.length - 1] == ('区') -> _name.substring(_name.indexOf('市')+1)
                 else -> _name
             }
         } catch (e: Exception) {
