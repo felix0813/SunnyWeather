@@ -1,4 +1,4 @@
-package com.example.sunnyweather.UI.place
+package com.example.sunnyweather.ui.place
 
 import android.app.Activity
 import android.content.Intent
@@ -6,44 +6,39 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sunnyweather.City
 import com.example.sunnyweather.R
 
-class ResultAdapter(
-    private val resultList: ArrayList<City>,
-    private val activity: AppCompatActivity
-) :
-    RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
+class HintAdapter(private val hintList: ArrayList<City>, private val activity: AppCompatActivity) :
+    RecyclerView.Adapter<HintAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val resultButton: Button = view.findViewById(R.id.result_button)
-        val idtext: TextView = view.findViewById(R.id.idtext)
+        val text: TextView = view.findViewById(R.id.hintText)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.result_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.hint_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val result = resultList[position]
-        holder.idtext.text = result.id.toString()
-        val tmp = result.name.toString()
-        holder.resultButton.text = tmp
-        holder.resultButton.setOnClickListener {
+        val city = hintList[position]
+        holder.text.text = city.name
+
+        holder.itemView.setOnClickListener {
 
             //Toast.makeText(MyApplication.context,"click id is ${holder.idtext.text.toString()}",Toast.LENGTH_SHORT).show()
-            Log.e("id", holder.idtext.text.toString())
+            Log.e("id", holder.text.text.toString())
             val intent = Intent()
-            intent.putExtra("selectedCity", result)
+            intent.putExtra("selectedCity", city)
             activity.setResult(Activity.RESULT_OK, intent)
             activity.finish()
         }
     }
 
-    override fun getItemCount() = resultList.size
+    override fun getItemCount() = hintList.size
 
 }

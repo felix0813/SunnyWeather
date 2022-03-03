@@ -1,4 +1,4 @@
-package com.example.sunnyweather.UI.place
+package com.example.sunnyweather.ui.place
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,8 +9,8 @@ import com.example.sunnyweather.Address
 import com.example.sunnyweather.City
 import com.example.sunnyweather.MyApplication
 import com.example.sunnyweather.R
-import com.example.sunnyweather.logic.DAO.AddressDB
-import com.example.sunnyweather.logic.DAO.CityDB
+import com.example.sunnyweather.logic.dao.AddressDB
+import com.example.sunnyweather.logic.dao.CityDB
 import kotlin.concurrent.thread
 
 @SuppressLint("StaticFieldLeak")

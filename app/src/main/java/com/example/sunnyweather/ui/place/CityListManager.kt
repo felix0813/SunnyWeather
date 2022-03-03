@@ -1,4 +1,4 @@
-package com.example.sunnyweather.UI.place
+package com.example.sunnyweather.ui.place
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider

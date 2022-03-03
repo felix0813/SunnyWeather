@@ -1,4 +1,4 @@
-package com.example.sunnyweather.UI.place
+package com.example.sunnyweather.ui.place
 
 import android.annotation.SuppressLint
 import android.util.Log

@@ -20,8 +20,8 @@ import com.baidu.location.BDAbstractLocationListener
 import com.baidu.location.BDLocation
 import com.baidu.location.LocationClient
 import com.baidu.location.LocationClientOption
-import com.example.sunnyweather.UI.weather.SearchWeather
-import com.example.sunnyweather.UI.weather.WeatherAdapter
+import com.example.sunnyweather.ui.weather.SearchWeather
+import com.example.sunnyweather.ui.weather.WeatherAdapter
 import com.example.sunnyweather.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.concurrent.thread

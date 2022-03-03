@@ -1,4 +1,4 @@
-package com.example.sunnyweather.logic.DAO
+package com.example.sunnyweather.logic.dao
 
 import android.content.Context
 import androidx.room.Database

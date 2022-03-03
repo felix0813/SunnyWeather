@@ -1,4 +1,4 @@
-package com.example.sunnyweather.UI.place
+package com.example.sunnyweather.ui.place
 
 import android.content.Context
 import android.util.Log

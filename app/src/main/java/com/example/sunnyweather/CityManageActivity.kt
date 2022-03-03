@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sunnyweather.UI.place.CityAdapter
-import com.example.sunnyweather.UI.place.CityListManager
-import com.example.sunnyweather.UI.weather.SearchWeather
+import com.example.sunnyweather.ui.place.CityAdapter
+import com.example.sunnyweather.ui.place.CityListManager
+import com.example.sunnyweather.ui.weather.SearchWeather
 import com.example.sunnyweather.databinding.ActivityCityManageBinding
 import kotlin.concurrent.thread
 

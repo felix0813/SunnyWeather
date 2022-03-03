@@ -1,4 +1,4 @@
-package com.example.sunnyweather.UI.weather
+package com.example.sunnyweather.ui.weather
 
 import android.util.Log
 import android.view.LayoutInflater

@@ -7,9 +7,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sunnyweather.UI.place.HintAdapter
-import com.example.sunnyweather.UI.place.MyQueryTextListener
-import com.example.sunnyweather.UI.place.ResultAdapter
+import com.example.sunnyweather.ui.place.HintAdapter
+import com.example.sunnyweather.ui.place.MyQueryTextListener
+import com.example.sunnyweather.ui.place.ResultAdapter
 import com.example.sunnyweather.databinding.ActivityAddCityBinding
 
 class AddCityActivity : AppCompatActivity() {
