@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 class Address(_id: Int?) {
     @PrimaryKey
     var id = _id
-
+    constructor():this(null)
 }
