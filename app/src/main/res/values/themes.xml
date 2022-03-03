@@ -15,7 +15,4 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="greyButton">
-        <item name="colorButtonNormal">@color/black</item>
-    </style>
 </resources>
