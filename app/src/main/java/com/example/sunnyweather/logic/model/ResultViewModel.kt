@@ -1,10 +1,10 @@
-package com.example.sunnyweather.Logic.model
+package com.example.sunnyweather.logic.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ResultViewModel : ViewModel() {
-    val resultList = MutableLiveData<ArrayList<String>>()
+    private val resultList = MutableLiveData<ArrayList<String>>()
     val size = MutableLiveData<Int>()
 
     init {

@@ -11,13 +11,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sunnyweather.City
-import com.example.sunnyweather.CityManageActivity
 import com.example.sunnyweather.R
 
 class HintAdapter(private val hintList: ArrayList<City>, private val activity: AppCompatActivity) :
     RecyclerView.Adapter<HintAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val text = view.findViewById<TextView>(R.id.hintText)
+        val text: TextView = view.findViewById(R.id.hintText)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,7 +34,7 @@ class HintAdapter(private val hintList: ArrayList<City>, private val activity: A
             Log.e("id", holder.text.text.toString())
             val intent = Intent()
             intent.putExtra("selectedCity", city)
-            activity.setResult(Activity.RESULT_OK,intent)
+            activity.setResult(Activity.RESULT_OK, intent)
             activity.finish()
         }
     }

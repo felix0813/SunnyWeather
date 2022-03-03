@@ -11,12 +11,12 @@ import com.example.sunnyweather.R
 import com.example.sunnyweather.Weather
 import java.util.*
 
-class WeatherAdapter(val weatherList: Array<Weather?>) :
+class WeatherAdapter(private val weatherList: Array<Weather?>) :
     RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val skyconImg = view.findViewById<ImageView>(R.id.skyconImg)
-        val temperature = view.findViewById<TextView>(R.id.subTemperature)
-        val time = view.findViewById<TextView>(R.id.time)
+        val skyconImg: ImageView = view.findViewById(R.id.skyconImg)
+        val temperature: TextView = view.findViewById(R.id.subTemperature)
+        val time: TextView = view.findViewById(R.id.time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -1,4 +1,4 @@
-package com.example.sunnyweather.Logic.model
+package com.example.sunnyweather.logic.model
 
 import androidx.lifecycle.ViewModel
 import com.example.sunnyweather.DetailedWeather
@@ -10,6 +10,6 @@ object DetailedWeatherModel : ViewModel() {
         if (!detailedWeatherList.containsKey(id)) {
             size++
         }
-        detailedWeatherList.put(id, weather)
+        detailedWeatherList[id] = weather
     }
 }

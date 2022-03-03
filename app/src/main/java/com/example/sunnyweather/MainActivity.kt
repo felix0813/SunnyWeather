@@ -1,7 +1,6 @@
 package com.example.sunnyweather
 
 import android.Manifest
-import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,8 +10,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -43,8 +40,8 @@ class MainActivity : AppCompatActivity() {
     private var isFirst by Delegates.notNull<Boolean>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        isFirst=getSharedPreferences("ak",Context.MODE_PRIVATE).all.isEmpty()
-        val reader=getSharedPreferences("ak",Context.MODE_PRIVATE)
+        isFirst = getSharedPreferences("ak", Context.MODE_PRIVATE).all.isEmpty()
+        val reader = getSharedPreferences("ak", Context.MODE_PRIVATE)
         reader.edit().apply {
             putString("ak", "Pt4ChzU3W0ca8SpE")
             apply()
@@ -81,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 nowCityName = cityArray[order]!!.name!!
                 runOnUiThread { initialAll() }
 
-                Log.d("test",nowCityName)
+                Log.d("test", nowCityName)
             }
         }
         binding.nextCity.setOnClickListener {
@@ -96,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                 nowCity = cityArray[order]!!.id!!
                 nowCityName = cityArray[order]!!.name!!
                 runOnUiThread { initialAll() }
-                Log.d("test",nowCityName)
+                Log.d("test", nowCityName)
             }
         }
         binding.refreshButton.bringToFront()
@@ -118,6 +115,7 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
     private fun getReady() {
         reader = getSharedPreferences("monitorCity", MODE_PRIVATE)
         map = reader.all
@@ -306,11 +304,16 @@ class MainActivity : AppCompatActivity() {
             binding.skyconText3.text = getSkyconString(detailedWeather.arrDaily[2]!!.skycon)
             binding.skyconText4.text = getSkyconString(detailedWeather.arrDaily[3]!!.skycon)
             binding.skyconText5.text = getSkyconString(detailedWeather.arrDaily[4]!!.skycon)
-            binding.temperature1.text = getTemperatureString(detailedWeather.arrDaily[0]!!.temperature)
-            binding.temperature2.text = getTemperatureString(detailedWeather.arrDaily[1]!!.temperature)
-            binding.temperature3.text = getTemperatureString(detailedWeather.arrDaily[2]!!.temperature)
-            binding.temperature4.text = getTemperatureString(detailedWeather.arrDaily[3]!!.temperature)
-            binding.temperature5.text = getTemperatureString(detailedWeather.arrDaily[4]!!.temperature)
+            binding.temperature1.text =
+                getTemperatureString(detailedWeather.arrDaily[0]!!.temperature)
+            binding.temperature2.text =
+                getTemperatureString(detailedWeather.arrDaily[1]!!.temperature)
+            binding.temperature3.text =
+                getTemperatureString(detailedWeather.arrDaily[2]!!.temperature)
+            binding.temperature4.text =
+                getTemperatureString(detailedWeather.arrDaily[3]!!.temperature)
+            binding.temperature5.text =
+                getTemperatureString(detailedWeather.arrDaily[4]!!.temperature)
             binding.apparentTemperature.text =
                 getTemperatureString(detailedWeather.apparentTemperature.toString())
             binding.windSpeed.text = getWindDegree(detailedWeather.windSpeed)
@@ -325,35 +328,43 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun getDate(addition: Int): String {
+    private fun getDate(addition: Int): String {
         val c = Calendar.getInstance()
         c.timeZone = TimeZone.getTimeZone("GMT+8:00")
         var mMonth = (c.get(Calendar.MONTH) + 1).toString()// 获取当前月份
         var mDay = (c.get(Calendar.DAY_OF_MONTH) + addition).toString()// 获取当前月份的日期号码
         var mWay = ((c.get(Calendar.DAY_OF_WEEK) + addition) % 7).toString()
-        if ("1" == mWay) {
-            mWay = "天"
-        } else if ("2" == mWay) {
-            mWay = "一"
-        } else if ("3" == mWay) {
-            mWay = "二"
-        } else if ("4" == mWay) {
-            mWay = "三"
-        } else if ("5" == mWay) {
-            mWay = "四"
-        } else if ("6" == mWay) {
-            mWay = "五"
-        } else if ("0" == mWay) {
-            mWay = "六"
+        when (mWay) {
+            "1" -> {
+                mWay = "天"
+            }
+            "2" -> {
+                mWay = "一"
+            }
+            "3" -> {
+                mWay = "二"
+            }
+            "4" -> {
+                mWay = "三"
+            }
+            "5" -> {
+                mWay = "四"
+            }
+            "6" -> {
+                mWay = "五"
+            }
+            "0" -> {
+                mWay = "六"
+            }
         }
         if (mMonth == "1" || mMonth == "3" || mMonth == "5" || mMonth == "7" || mMonth == "8" || mMonth == "10" || mMonth == "12"
         ) {
             if (mDay.toInt() > 31) {
                 mDay = (mDay.toInt() % 31).toString()
-                if (mMonth == "12") {
-                    mMonth = "1"
+                mMonth = if (mMonth == "12") {
+                    "1"
                 } else {
-                    mMonth = (mMonth.toInt() + 1).toString()
+                    (mMonth.toInt() + 1).toString()
                 }
             }
         } else if (mMonth == "4" || mMonth == "6" || mMonth == "9" || mMonth == "11") {
@@ -394,7 +405,7 @@ class MainActivity : AppCompatActivity() {
         else -> (R.drawable.bg_place)
     }
 
-    fun getSkyconIMG(num: Int, weather: DetailedWeather) =
+    private fun getSkyconIMG(num: Int, weather: DetailedWeather) =
         when (weather.arrDaily[num]!!.skycon) {
             "CLEAR_DAY" -> (R.drawable.ic_clear_day)
             "CLEAR_NIGHT" -> (R.drawable.ic_clear_night)
@@ -419,7 +430,7 @@ class MainActivity : AppCompatActivity() {
             else -> Log.d("skycon", "error")
         }
 
-    fun getSkyconString(weather: String) =
+    private fun getSkyconString(weather: String) =
         when (weather) {
             "CLEAR_DAY" -> "晴"
             "CLEAR_NIGHT" -> "晴"
@@ -444,7 +455,7 @@ class MainActivity : AppCompatActivity() {
             else -> ""
         }
 
-    fun getWindDegree(speed: Double) =
+    private fun getWindDegree(speed: Double) =
         when {
             speed <= 0.2 -> "0级"
             speed <= 1.5 -> "1级"
@@ -462,10 +473,10 @@ class MainActivity : AppCompatActivity() {
             else -> "13级"
         }
 
-    fun getTemperatureString(str: String) = str.toDouble().toInt().toString() + "℃"
-    fun getHumidity(humidity: Double) = (humidity * 100).toInt().toString() + "%"
-    fun getVisibility(num: Double) = num.toInt().toString() + "km"
-    fun getPressure(num: Double) = (num / 100).toInt().toString() + "hPa"
+    private fun getTemperatureString(str: String) = str.toDouble().toInt().toString() + "℃"
+    private fun getHumidity(humidity: Double) = (humidity * 100).toInt().toString() + "%"
+    private fun getVisibility(num: Double) = num.toInt().toString() + "km"
+    private fun getPressure(num: Double) = (num / 100).toInt().toString() + "hPa"
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

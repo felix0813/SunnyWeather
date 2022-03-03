@@ -13,9 +13,9 @@ import com.example.sunnyweather.UI.place.ResultAdapter
 import com.example.sunnyweather.databinding.ActivityAddCityBinding
 
 class AddCityActivity : AppCompatActivity() {
-    lateinit var binding: ActivityAddCityBinding
-    val list = ArrayList<City>()
-    val list2 = ArrayList<City>()
+    private lateinit var binding: ActivityAddCityBinding
+    private val list = ArrayList<City>()
+    private val list2 = ArrayList<City>()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {

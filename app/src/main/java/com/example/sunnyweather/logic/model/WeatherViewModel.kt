@@ -1,4 +1,4 @@
-package com.example.sunnyweather.Logic.model
+package com.example.sunnyweather.logic.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +14,6 @@ object WeatherViewModel : ViewModel() {
     }
 
     fun addWeather(cityID: Int, weather: Weather) {
-        weatherList.value!!.put(cityID, weather)
+        weatherList.value!![cityID] = weather
     }
 }

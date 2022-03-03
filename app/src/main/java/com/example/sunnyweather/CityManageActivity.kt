@@ -21,10 +21,11 @@ import kotlin.concurrent.thread
 
 
 class CityManageActivity : AppCompatActivity() {
-    lateinit var cityListManager: CityListManager
-    lateinit var cityList: ArrayList<SelectedCity>
-    lateinit var binding: ActivityCityManageBinding
-    lateinit var adapter: CityAdapter
+    private lateinit var cityListManager: CityListManager
+    private lateinit var cityList: ArrayList<SelectedCity>
+    private lateinit var binding: ActivityCityManageBinding
+    private lateinit var adapter: CityAdapter
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         cityListManager = CityListManager(this)
@@ -33,7 +34,7 @@ class CityManageActivity : AppCompatActivity() {
         map.forEach {
             cityListManager.addCity(SelectedCity(it.key, "--", it.value.toString().toInt()))
         }
-        cityList = cityListManager.getCityList() ?: ArrayList<SelectedCity>()
+        cityList = cityListManager.getCityList() ?: ArrayList()
         super.onCreate(savedInstanceState)
         binding = ActivityCityManageBinding.inflate(layoutInflater)
         setSupportActionBar(binding.placeToolbar)
@@ -50,7 +51,7 @@ class CityManageActivity : AppCompatActivity() {
         registerForContextMenu(recyclerView)
         binding.addCity.bringToFront()
         binding.addCity.setOnClickListener {
-            startActivityForResult(Intent(this, AddCityActivity::class.java),1)
+            startActivityForResult(Intent(this, AddCityActivity::class.java), 1)
         }
         binding.swipeRefresh.setOnRefreshListener {
             thread {
@@ -67,7 +68,7 @@ class CityManageActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode== RESULT_OK&&requestCode==1){
+        if (resultCode == RESULT_OK && requestCode == 1) {
             thread {
                 Thread.sleep(1000)
                 runOnUiThread {
@@ -104,6 +105,7 @@ class CityManageActivity : AppCompatActivity() {
             refreshTemperature(adapter)
         }
     }
+
     //辽宁省
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {

@@ -2,20 +2,24 @@ package com.example.sunnyweather.UI.place
 
 import android.content.Context
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sunnyweather.R
 import com.example.sunnyweather.SelectedCity
-import java.util.*
 
-class CityAdapter(val cityList: List<SelectedCity>, val activity: AppCompatActivity) :
+class CityAdapter(
+    private val cityList: List<SelectedCity>,
+    private val activity: AppCompatActivity
+) :
     RecyclerView.Adapter<CityAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val cityName = view.findViewById<TextView>(R.id.cityName)
-        val temperature = view.findViewById<TextView>(R.id.temperature)
+        val cityName: TextView = view.findViewById(R.id.cityName)
+        val temperature: TextView = view.findViewById(R.id.temperature)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -65,7 +69,7 @@ class CityAdapter(val cityList: List<SelectedCity>, val activity: AppCompatActiv
         }
         val cityName = StringBuilder()
         var past = false
-        if (city.name.contains("省")&&city.name.get(city.name.length-1)!='省') {
+        if (city.name.contains("省") && city.name[city.name.length - 1] != '省') {
             for (char in city.name) {
                 if (past) {
                     cityName.append(char)

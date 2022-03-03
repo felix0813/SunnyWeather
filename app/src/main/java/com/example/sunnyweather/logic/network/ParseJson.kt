@@ -1,4 +1,4 @@
-package com.example.sunnyweather.Logic.network
+package com.example.sunnyweather.logic.network
 
 import android.util.Log
 import com.example.sunnyweather.DetailedWeather
@@ -9,13 +9,12 @@ object ParseJson {
     fun simpleParseJson(responseData: String): Weather {
         try {
             Log.d("data", responseData)
-            val JsonObject = JSONObject(responseData)
-            val result = JsonObject.getJSONObject("result")
+            val jsonObject = JSONObject(responseData)
+            val result = jsonObject.getJSONObject("result")
             val realtime = result.getJSONObject("realtime")
             val temperature = realtime.getDouble("temperature")
             val skycon = realtime.getString("skycon")
-            val weather = Weather(temperature.toString(), skycon)
-            return weather
+            return Weather(temperature.toString(), skycon)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -23,15 +22,11 @@ object ParseJson {
     }
 
     fun detailedParseJson(responseData: String): DetailedWeather {
-        /*var data=responseData
-        if(data.startsWith("\ufeff")){
-            data=responseData.substring(1)
-        }*/
-        val JsonObject = JSONObject(responseData)
+        val jsonObject = JSONObject(responseData)
         try {
 
 
-            val result = JsonObject.getJSONObject("result")
+            val result = jsonObject.getJSONObject("result")
             val realtime = result.getJSONObject("realtime")
             val temperature = realtime.getDouble("temperature")
             val apparentTemperature = realtime.getDouble("apparent_temperature")
@@ -40,7 +35,7 @@ object ParseJson {
             val windSpeed = wind.getDouble("speed")
             val degree = wind.getDouble("direction")
             val windDirection = when {
-                degree <= 22.5 && degree >= 337.5 -> "北风"
+                degree in 337.5..22.5 -> "北风"
                 degree > 22.5 && degree <= 67.5 -> "东北风"
                 degree > 67.5 && degree <= 112.5 -> "东风"
                 degree > 112.5 && degree <= 157.5 -> "东南风"
@@ -95,7 +90,7 @@ object ParseJson {
         */
     }
 
-    fun parseHourlyToArr(hourly: JSONObject): Array<Weather?> {
+    private fun parseHourlyToArr(hourly: JSONObject): Array<Weather?> {
         var arr = hourly.getJSONArray("temperature")
         val arr1 = arrayOfNulls<Double>(24)
         for (num in 0..23) {
@@ -113,7 +108,7 @@ object ParseJson {
         return result
     }
 
-    fun parseDailyToArr(daily: JSONObject): Array<Weather?> {
+    private fun parseDailyToArr(daily: JSONObject): Array<Weather?> {
         var arr = daily.getJSONArray("temperature")
         val arr1 = arrayOfNulls<Double>(5)
         for (num in 0..4) {

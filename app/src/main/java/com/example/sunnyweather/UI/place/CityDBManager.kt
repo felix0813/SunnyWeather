@@ -7,18 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.example.sunnyweather.Address
 import com.example.sunnyweather.City
-import com.example.sunnyweather.Logic.DAO.AddressDB
-import com.example.sunnyweather.Logic.DAO.CityDB
 import com.example.sunnyweather.MyApplication
 import com.example.sunnyweather.R
+import com.example.sunnyweather.logic.DAO.AddressDB
+import com.example.sunnyweather.logic.DAO.CityDB
 import kotlin.concurrent.thread
 
 @SuppressLint("StaticFieldLeak")
-class CityDBManager() {
+class CityDBManager {
     val context = MyApplication.context
     val cityDAO = CityDB.getDB(context).cityDao()
-    val addressDAO = AddressDB.getAddressDB(context).addressDAO()
-    var hasInit = false
+    private val addressDAO = AddressDB.getAddressDB(context).addressDAO()
+    private var hasInit = false
 
     init {
         checkInit()
@@ -27,14 +27,14 @@ class CityDBManager() {
     private fun checkInit() {
         val reader = context.getSharedPreferences("city", AppCompatActivity.MODE_PRIVATE)
         hasInit = reader.getBoolean("hasInit", false)
-        if (hasInit == false) {
+        if (!hasInit) {
             thread { initCity() }
         } else {
             thread { Log.d("citynum", cityDAO.queryCount().toString()) }
         }
     }
 
-    fun initCity() {
+    private fun initCity() {
         val inputStream2 = context.resources.openRawResource(R.raw.district_code)
         val reader2 = inputStream2.bufferedReader()
         var count2 = 0
@@ -43,9 +43,9 @@ class CityDBManager() {
             val id = arr[0].toInt()
             Log.e("num", id.toString())
             val name = arr[3]
-            val x = arr[1].toFloat()
-            val y = arr[2].toFloat()
-            val address = Address(id, x, y)
+            arr[1].toFloat()
+            arr[2].toFloat()
+            val address = Address(id)
             val city = City(name, id)
             try {
                 addressDAO.insertAddress(address)

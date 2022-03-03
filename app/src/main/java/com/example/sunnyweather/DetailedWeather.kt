@@ -14,5 +14,4 @@ class DetailedWeather(
     var comfort: String,
     var arrHourly: Array<Weather?>,
     var arrDaily: Array<Weather?>
-) {
-}
+)

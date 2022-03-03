@@ -1,4 +1,4 @@
-package com.example.sunnyweather.Logic.DAO
+package com.example.sunnyweather.logic.DAO
 
 import android.content.Context
 import androidx.room.Database
@@ -20,8 +20,8 @@ abstract class CityDB : RoomDatabase() {
             }
             return Room.databaseBuilder(context.applicationContext, CityDB::class.java, "cityDB")
                 .allowMainThreadQueries().build().apply {
-                instance = this
-            }
+                    instance = this
+                }
         }
     }
 }

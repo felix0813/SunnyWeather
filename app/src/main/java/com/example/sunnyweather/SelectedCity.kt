@@ -5,6 +5,4 @@ class SelectedCity(
     var temperature: String,
     val id: Int = -1,
     var skycon: String = "CLEAR_DAY"
-) {
-
-}
+)

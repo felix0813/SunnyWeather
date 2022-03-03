@@ -1,4 +1,4 @@
-package com.example.sunnyweather.Logic.model
+package com.example.sunnyweather.logic.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

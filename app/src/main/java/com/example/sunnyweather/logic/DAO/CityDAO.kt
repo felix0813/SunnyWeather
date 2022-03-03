@@ -1,4 +1,4 @@
-package com.example.sunnyweather.Logic.DAO
+package com.example.sunnyweather.logic.DAO
 
 import androidx.room.Dao
 import androidx.room.Insert

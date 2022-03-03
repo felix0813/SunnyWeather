@@ -11,14 +11,16 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sunnyweather.City
-import com.example.sunnyweather.CityManageActivity
 import com.example.sunnyweather.R
 
-class ResultAdapter(val resultList: ArrayList<City>, val activity: AppCompatActivity) :
+class ResultAdapter(
+    private val resultList: ArrayList<City>,
+    private val activity: AppCompatActivity
+) :
     RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val resultButton = view.findViewById<Button>(R.id.result_button)
-        val idtext = view.findViewById<TextView>(R.id.idtext)
+        val resultButton: Button = view.findViewById(R.id.result_button)
+        val idtext: TextView = view.findViewById(R.id.idtext)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,7 +39,7 @@ class ResultAdapter(val resultList: ArrayList<City>, val activity: AppCompatActi
             Log.e("id", holder.idtext.text.toString())
             val intent = Intent()
             intent.putExtra("selectedCity", result)
-            activity.setResult(Activity.RESULT_OK,intent)
+            activity.setResult(Activity.RESULT_OK, intent)
             activity.finish()
         }
     }
